@@ -13,7 +13,7 @@ public class User {
         String name = Main.scanner.nextLine();
 
         if (name.isEmpty()) {
-            throw new Exception("Unable to locate your account.");
+            throw new Exception("Sorry, we were unable to locate your account.");
         }
         else {
             System.out.println("Thanks for banking with us, " + name + ".");
