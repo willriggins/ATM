@@ -10,7 +10,7 @@ public class User {
     int numInt;
 
     public void chooseName() throws Exception {
-        String name = Main.scanner.nextLine();
+        name = Main.scanner.nextLine();
 
         if (name.isEmpty()) {
             throw new Exception("Unable to locate your account.");
@@ -30,7 +30,7 @@ public class User {
     }
 
     public void finishTransaction() throws Exception {
-        String menuChoice = Main.scanner.nextLine();
+        menuChoice = Main.scanner.nextLine();
 
         if (menuChoice.isEmpty()) {
             throw new Exception("You broke the bank.");
@@ -41,13 +41,13 @@ public class User {
         else if ((menuChoice.equals("2")) || menuChoice.equalsIgnoreCase("two")) {
             System.out.println("How much money would you like to withdraw?");
 
-            String num = Main.scanner.nextLine();
+            num = Main.scanner.nextLine();
 
             if (num.isEmpty()) {
                 throw new Exception("You must enter the amount that you wish to withdraw.");
             }
             else {
-                int numInt = Integer.valueOf(num);
+                numInt = Integer.valueOf(num);
 
                 if (numInt > 100) {
                     throw new Exception("Insufficient funds available. You may only withdraw up to $100.");
