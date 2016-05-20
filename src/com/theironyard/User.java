@@ -9,7 +9,7 @@ public class User {
     static String name;
     String menuChoice;
     String num;
-    int numInt;
+    double numDouble;
     String deposit;
     double numDeposit;
     String response;
@@ -58,7 +58,7 @@ public class User {
             System.out.println("1. Check your balance");
             System.out.println("2. Withdraw funds");
             System.out.println("3. Cancel");
-            System.out.println("4. Close your account.");
+            System.out.println("4. Close your account");
             System.out.println("5. Deposit funds");
             System.out.println();
             System.out.println("Enter the correct option number to continue.");
@@ -79,14 +79,16 @@ public class User {
                 if (num.isEmpty()) {
                     throw new Exception("You must enter the amount that you wish to withdraw.");
                 } else {
-                    numInt = Integer.valueOf(num);
+                    numDouble = Double.valueOf(num);
 
-                    if (numInt > 100) {
-                        throw new Exception("Insufficient funds available. You may only withdraw up to $100.");
-                    } else if (numInt < 1) {
+                    if (numDouble > newBalance) {
+                        System.out.println("Insufficient funds available. You may only withdraw up to $" + newBalance + ".");
+                    } else if (numDouble < 1) {
                         throw new Exception("You must withdraw at least $1.");
                     } else {
                         System.out.println("Please take your $" + num + ".");
+                        newBalance -= numDouble;
+                        record.put(name, newBalance);
                     }
                 }
             } else if ((menuChoice.equals("3")) || menuChoice.equalsIgnoreCase("three")) {
@@ -99,7 +101,7 @@ public class User {
                 record.remove(name);
                 inUse = false;
             }
-            else if (menuChoice.equals("5") || menuChoice.equals("five")) {
+            else if (menuChoice.equals("5") || menuChoice.equalsIgnoreCase("five")) {
                 System.out.println("How much would you like to deposit?");
 
                 deposit = Main.nextLine();
