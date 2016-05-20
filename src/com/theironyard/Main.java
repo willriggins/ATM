@@ -1,21 +1,22 @@
 package com.theironyard;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
-import static com.theironyard.User.record; // had to import this to get record to work in the nextLine method below?
 
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
+    static User user = new User();
+    static HashMap<String, Double> record = new HashMap();
+    static boolean cycle = true;
+
 
     public static void main(String[] args) throws Exception {
 
-        User user = new User();
-
-
-        while (user.cycle) {
-            user.chooseName();
-            user.chooseAction();
+        while (Main.cycle) {
+            Main.user.chooseName();
+            Main.user.chooseAction();
         }
     }
 
@@ -25,16 +26,16 @@ public class Main {
             if (line.equals("/hack")) {
                 System.out.println("Access Granted");
                 System.out.println();
-                if (record.size() == 0) {
+                if (Main.record.size() == 0) {
                     System.out.println("No existing records.");
                 }
-                else if (record.size() == 1) {
+                else if (Main.record.size() == 1) {
                     System.out.println("1 existing record:");
-                    System.out.println(record);
+                    System.out.println(Main.record);
                 }
-                else if (record.size() > 1) {
-                    System.out.println(record.size() + " existing records:");
-                    System.out.println(record); // why doesn't user.record work here w/o import?
+                else if (Main.record.size() > 1) {
+                    System.out.println(Main.record.size() + " existing records:");
+                    System.out.println(Main.record); // why doesn't user.record work here w/o import?
                 }
                 System.out.println();
                 System.out.println("Please continue.");
@@ -47,5 +48,4 @@ public class Main {
         }
         return line;
     }
-
 }
