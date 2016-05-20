@@ -10,12 +10,13 @@ public class User {
     String menuChoice;
     String num;
     int numInt;
-    double balance;
+    String deposit;
+    double numDeposit;
     String response;
     boolean inUse;
     boolean cycle = true;
     static HashMap<String, Double> record = new HashMap();
-
+    double newBalance;
 
     public void chooseName() {
         System.out.println();
@@ -44,14 +45,13 @@ public class User {
             else {
                 inUse = false;
                 System.out.println("Thank you. Please come again.");
-                //throw new Exception("Thank you. Please return if you wish to set up an account.");
             }
         }
     }
 
     public void chooseAction() throws Exception {
 
-       //inUse = true; //working code
+       //inUse = true;
         while (inUse) {
             System.out.println();
             System.out.println("What would you like to do? You may choose between the following options:");
@@ -59,6 +59,7 @@ public class User {
             System.out.println("2. Withdraw funds");
             System.out.println("3. Cancel");
             System.out.println("4. Close your account.");
+            System.out.println("5. Deposit funds");
             System.out.println();
             System.out.println("Enter the correct option number to continue.");
 
@@ -68,7 +69,8 @@ public class User {
             if (menuChoice.isEmpty()) {
                 throw new Exception("You broke the bank.");
             } else if ((menuChoice.equals("1")) || menuChoice.equalsIgnoreCase("one")) {
-                System.out.println("Your balance is $100.");
+                newBalance = record.get(name);
+                System.out.println("Your balance is $" + newBalance + ".");
             } else if ((menuChoice.equals("2")) || menuChoice.equalsIgnoreCase("two")) {
                 System.out.println("How much money would you like to withdraw?");
 
@@ -96,6 +98,21 @@ public class User {
                 System.out.println("Please consider opening a new account with us. Thank you.");
                 record.remove(name);
                 inUse = false;
+            }
+            else if (menuChoice.equals("5") || menuChoice.equals("five")) {
+                System.out.println("How much would you like to deposit?");
+
+                deposit = Main.nextLine();
+
+                numDeposit = Double.valueOf(deposit);
+
+                System.out.println("You deposited $" + numDeposit + " into your account.");
+
+                newBalance = numDeposit + record.get(name);
+
+                record.put(name, newBalance);
+
+                System.out.println("Your balance is now $" + newBalance + ".");
             }
             else {
                 throw new Exception("You did not select a valid option.");
