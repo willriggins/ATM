@@ -24,8 +24,7 @@ public class User {
         if (Main.record.containsKey(name)) {
             System.out.println("Welcome back, " + name + ".");
             inUse = true;
-        }
-        else {
+        } else {
             System.out.println("We could not find an account under this name.");
             System.out.println("Would you like to set up an account? Please choose an option:");
             System.out.println("1 - Yes");
@@ -38,8 +37,7 @@ public class User {
                 System.out.println("Thanks, " + name + ". Your account has been created.");
                 Main.record.put(name, 0.0);
                 inUse = true;
-            }
-            else {
+            } else {
                 inUse = false;
                 System.out.println("Thank you. Please come again.");
             }
@@ -48,7 +46,6 @@ public class User {
 
     public void chooseAction() throws Exception {
 
-       //inUse = true;
         while (inUse) {
             System.out.println();
             System.out.println("What would you like to do? You may choose between the following options:");
@@ -63,11 +60,10 @@ public class User {
 
             menuChoice = Main.nextLine();
 
-            if (menuChoice.isEmpty()) {
-                throw new Exception("You broke the bank.");
-            } else if ((menuChoice.equals("1")) || menuChoice.equalsIgnoreCase("one")) {
+            if ((menuChoice.equals("1")) || menuChoice.equalsIgnoreCase("one")) {
                 newBalance = Main.record.get(name);
-                System.out.println("Your balance is $" + newBalance + ".");
+                System.out.println();
+                System.out.println("Your balance is $" + String.format("%.2f", newBalance) + ".");
             } else if ((menuChoice.equals("2")) || menuChoice.equalsIgnoreCase("two")) {
                 System.out.println("How much money would you like to withdraw?");
 
@@ -79,43 +75,37 @@ public class User {
                     numDouble = Double.valueOf(num);
 
                     if (numDouble > newBalance) {
-                        System.out.println("Insufficient funds available. You may only withdraw up to $" + newBalance + ".");
+                        System.out.println("Insufficient funds available. You may only withdraw up to $" + String.format("%.2f", newBalance) + ".");
                     } else if (numDouble < 1) {
-                        throw new Exception("You must withdraw at least $1.");
+                        System.out.println("You must withdraw at least $1.");
                     } else {
-                        System.out.println("Please take your $" + num + ".");
+                        System.out.println("Please take your $" + String.format("%.2f", numDouble) + ".");
                         newBalance -= numDouble;
                         Main.record.put(name, newBalance);
                     }
                 }
-            }
-            else if (menuChoice.equals("3") || menuChoice.equalsIgnoreCase("three")) {
+            } else if (menuChoice.equals("3") || menuChoice.equalsIgnoreCase("three")) {
                 System.out.println("How much would you like to deposit?");
 
                 deposit = Main.nextLine();
-
                 numDeposit = Double.valueOf(deposit);
 
-                System.out.println("You deposited $" + numDeposit + " into your account.");
+                System.out.println("You deposited $" + String.format("%.2f", numDeposit) + " into your account.");
 
                 newBalance = numDeposit + Main.record.get(name);
-
                 Main.record.put(name, newBalance);
 
-                System.out.println("Your balance is now $" + newBalance + ".");
-            }
-            else if ((menuChoice.equals("4")) || menuChoice.equalsIgnoreCase("four")) {
+                System.out.println("Your balance is now $" + String.format("%.2f", newBalance) + ".");
+            } else if ((menuChoice.equals("4")) || menuChoice.equalsIgnoreCase("four")) {
                 System.out.println("Your account has been closed.");
                 System.out.println("Please consider opening a new account with us. Thank you.");
                 Main.record.remove(name);
                 inUse = false;
-            }
-            else if ((menuChoice.equals("5")) || menuChoice.equalsIgnoreCase("five")) {
+            } else if ((menuChoice.equals("5")) || menuChoice.equalsIgnoreCase("five")) {
                 System.out.println("Thank you and please come again.");
                 inUse = false;
-            }
-            else {
-                throw new Exception("You did not select a valid option.");
+            } else {
+                System.out.println("You did not select a valid option. Please try again.");
             }
         }
     }

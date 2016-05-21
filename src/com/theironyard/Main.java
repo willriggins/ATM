@@ -1,7 +1,9 @@
 package com.theironyard;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class Main {
@@ -24,28 +26,41 @@ public class Main {
         String line = scanner.nextLine();
         while (line.startsWith("/")) {
             if (line.equals("/hack")) {
-                System.out.println("Access Granted");
+                System.out.println("ACCESS GRANTED. RETRIEVING ALL AVAILABLE RECORDS...");
                 System.out.println();
                 if (Main.record.size() == 0) {
-                    System.out.println("No existing records.");
+                    System.out.println("UNABLE TO LOCATE ANY RECORDS");
                 }
                 else if (Main.record.size() == 1) {
-                    System.out.println("1 existing record:");
-                    System.out.println(Main.record);
+                    System.out.println("FOUND ONE RECORD:");
+                    System.out.println();
+                    getList();
                 }
                 else if (Main.record.size() > 1) {
-                    System.out.println(Main.record.size() + " existing records:");
-                    System.out.println(Main.record); // why doesn't user.record work here w/o import?
+                    System.out.println("FOUND " + Main.record.size() + " RECORDS:");
+                    System.out.println();
+                    getList();
                 }
-                System.out.println();
-                System.out.println("Please continue.");
             }
             else {
-                System.out.println("Error: Please repeat last input.");
+                System.out.println("Command not recognized");
             }
 
             line = scanner.nextLine();
         }
         return line;
+    }
+
+    public static void getList() {
+        Set setOfKeys = record.keySet();
+        Iterator iterator = setOfKeys.iterator();
+        int i = 1;
+        while (iterator.hasNext()) {
+            String key = (String)iterator.next();
+            Double value = record.get(key);
+            double valueDouble = Double.valueOf(value);
+            System.out.println(i + ". " + key+ ": $" + String.format("%.2f", valueDouble));
+            i += 1;
+        }
     }
 }
