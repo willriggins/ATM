@@ -16,7 +16,7 @@ public class User {
 
     public void chooseName() {
         System.out.println();
-        System.out.println("Welcome to the ATM. What is your name?");
+        System.out.println("Welcome to the ATM. Please enter your name?");
 
         name = Main.nextLine();
 
